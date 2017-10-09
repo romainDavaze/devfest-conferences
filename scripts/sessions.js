@@ -22,7 +22,7 @@
     });
   
   function parseSessionsData(data) {
-  
+    console.log(data.length);
     for (i in data) {
 
       let parent = document.getElementById('sessions');
@@ -33,15 +33,15 @@
   
       let element = document.createElement('a');
   
-      element.href = '/session-detail.html';
-      element.onclick = setSessionID(current.id);
+      element.setAttribute('href','/view/session-detail.html');
+      element.setAttribute('onclick','setSessionID('+current.id+')');
       element.innerHTML = current.title;
   
-      div.appendChild(element)
+      div.appendChild(element);
   
       parent.appendChild(div);
 
-      sessionsStorage.setItem(current.id, {
+      sessionsStorage.setItem(parseInt(current.id), {
         id: current.id,
         title: current.title,
         description: current.description,
