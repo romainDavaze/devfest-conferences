@@ -1,20 +1,19 @@
 (function (){
-  const currentSessionStorage = localforage.createInstance({
-    name: "current_session",
-    storeName: "current_session"
-  });
+  // const currentSessionStorage = localforage.createInstance({
+  //   name: "current_session",
+  //   storeName: "current_session"
+  // });
   
-  const sessionsStorage = localforage.createInstance({
-    name: "sessions",
-    storeName: "sessions"
-  })  
+  // const sessionsStorage = localforage.createInstance({
+  //   name: "sessions",
+  //   storeName: "sessions"
+  // })  
 
   fetch('https://raw.githubusercontent.com/DevInstitut/conference-data/master/sessions.json')
     .then(function (response) {
       return response.json();
     })
     .then(function (json) {
-      sessions = json;
       parseSessionsData(json);
     })
     .catch(function (error) {
@@ -22,7 +21,6 @@
     });
   
   function parseSessionsData(data) {
-    console.log(data.length);
     for (i in data) {
 
       let parent = document.getElementById('sessions');
@@ -33,26 +31,26 @@
   
       let element = document.createElement('a');
   
-      element.setAttribute('href','/view/session-detail.html');
-      element.setAttribute('onclick','setSessionID('+current.id+')');
+      element.setAttribute('href','/views/session-detail.html?sessionID='+current.id);
+      //element.setAttribute('onclick','setSessionID('+current.id+')');
       element.innerHTML = current.title;
   
       div.appendChild(element);
   
       parent.appendChild(div);
 
-      sessionsStorage.setItem(parseInt(current.id), {
-        id: current.id,
-        title: current.title,
-        description: current.description,
-        speakers: current.speakers
-      })
+      // sessionsStorage.setItem(parseInt(current.id), {
+      //   id: parseInt(current.id),
+      //   title: current.title,
+      //   description: current.description,
+      //   speakers: current.speakers
+      // })
     }
   }
   
-  function setSessionID(id){
-    currentSessionStorage.setItem('session', id);
-  }
+  // function setSessionID(id){
+  //   currentSessionStorage.setItem('session', id);
+  // }
 
 })();
 
