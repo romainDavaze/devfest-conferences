@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "http-server -a localhost -c 0",
-    "fake:api": "json-server --watch data.json"
+    "fake:api": "json-server --watch data/notes.json"
   },
   "author": "",
   "license": "ISC",

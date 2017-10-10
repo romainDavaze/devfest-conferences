@@ -30,7 +30,7 @@ const DEVFEST_URL = 'https://devfest.gdgnantes.com'
 
     let sessionID = window.location.search.substring(1).split('=').pop();
 
-    let session = sessions.filter(session => session.id == sessionID)[0];
+    let session = sessions.filter(session => session.id == sessionID).pop();
 
     document.getElementById('session-name').innerHTML = session.title;
 
@@ -44,6 +44,8 @@ const DEVFEST_URL = 'https://devfest.gdgnantes.com'
       document.getElementById('session-description').innerHTML = session.description;
     }
 
+    document.getElementById('session-notes').setAttribute('href', '/views/notes.html?sessionID='+session.id) ;
+
     fetch('https://raw.githubusercontent.com/DevInstitut/conference-data/master/speakers.json')
     .then(function (response) {
       return response.json();
@@ -54,6 +56,10 @@ const DEVFEST_URL = 'https://devfest.gdgnantes.com'
         speakers[i] = json[i];
       }
       
+      if(session.speakers){
+        document.getElementById('speakers').innerHTML = 'Speaker(s) <br/>';
+      }
+
       for(i in session.speakers) {
 
         let speaker = speakers.filter(speaker => speaker.id == session.speakers[i]).pop();

@@ -57,23 +57,20 @@
           let filteredSessions = sessions.filter(session => "speakers" in session)
 
 
-          filteredSessions.map(session => console.log(session.speakers + ' ' +(session.speakers.includes(speakerID)) + ' ' + speakerID))
+          let filterSpeakerSessions = filteredSessions.filter(session => session.speakers.filter(speaker => speaker == speakerID)[0] == speakerID)
 
-          for(i in filteredSessions) {
+          for(i in filterSpeakerSessions) {
             
             let sessionSpeakers = [];
 
-            for(y in filteredSessions[i].speakers){
-                
-                let sessionParent = document.getElementById('sessions');
-        
-                let sessionChild = document.createElement('a');
-                sessionChild.innerHTML = filteredSessions[i].title + '<br/>';
-                sessionChild.setAttribute('href', '/views/session-detail.html?sessionID='+filteredSessions[i].speakers[y]);
-        
-                sessionParent.appendChild(sessionChild);
+            let sessionParent = document.getElementById('sessions');
+    
+            let sessionChild = document.createElement('a');
+            sessionChild.innerHTML = filterSpeakerSessions[i].title + '<br/>';
+            sessionChild.setAttribute('href', '/views/session-detail.html?sessionID='+filterSpeakerSessions[i].id);
+    
+            sessionParent.appendChild(sessionChild);
 
-            }
             
           }
     
