@@ -3,17 +3,17 @@
   "name": "Devfest Nantes 2017 conferences",
   "icons": [
     {
-      "src": "assets/launcher-icon/icon-devfest-48x48.png",
+      "src": "www/assets/launcher-icon/icon-devfest-48x48.png",
       "type": "image/png",
       "sizes": "48x48"
     },
     {
-      "src": "assets/launcher-icon/icon-devfest-96x96.png",
+      "src": "www/assets/launcher-icon/icon-devfest-96x96.png",
       "type": "image/png",
       "sizes": "96x96"
     },
     {
-      "src": "assets/launcher-icon/icon-devfest-192x192.png",
+      "src": "www/assets/launcher-icon/icon-devfest-192x192.png",
       "type": "image/png",
       "sizes": "192x192"
     }

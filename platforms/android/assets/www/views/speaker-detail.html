@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+
+<head>
+    <link type="text/css" rel="stylesheet" href="../vendors/css/material-icons.css" />
+    <link type="text/css" rel="stylesheet" href="../vendors/css/materialize.css" media="screen,projection" />
+</head>
+
+<body>
+
+  <div id="speaker">
+
+    <h1 id="speaker-name"></h1>
+    <br/>
+
+    <div class="switch">
+      <label>
+        Off
+        <input id="add-contact" type="checkbox">
+        <span class="lever"></span>
+        On
+      </label>
+    </div>
+    <br/>
+
+    <img id="speaker-pic" />
+    <br/>
+
+    <p id="speaker-bio"></p>
+    <br/>
+
+    <ul id="sessions">
+
+    </ul>
+
+  </div>
+
+  <script src="../cordova.js"></script>
+  <script src="../vendors/js/jquery.min.js"></script>
+  <script src="../vendors/js/materialize.js"></script>
+  <script src="../vendors/js/localforage.js"></script>
+  <script src="../scripts/cache-service.js"></script>
+  <script src="../scripts/speaker-detail.js"></script>
+
+</body>
+
+</html>
