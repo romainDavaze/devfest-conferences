@@ -106,15 +106,24 @@ const DEVFEST_URL = 'https://devfest.gdgnantes.com';
           )
         }
 
-        let contact = navigator.contacts.create({
-          "displayName": currentSpeaker.name,
-          "name": currentSpeaker.name,
-          "organizations" : [speakerCompany],
-          "urls" : speakerLinks
-          // "photo" : [document.getElementById('speaker-pic').src]
-        })
+        getSpeakerSessions(speakerID)
+        .then(sessions => {
+          let conferences = 'Conference(s) \n';
+          sessions.map(session => conferences += session.title + '\n');
 
-        contact.save();
+          let contact = navigator.contacts.create({
+            "displayName": currentSpeaker.name,
+            "name": currentSpeaker.name,
+            "organizations" : [speakerCompany],
+            "urls" : speakerLinks,
+            "note" : conferences
+            // "photo" : [document.getElementById('speaker-pic').src]
+          })
+  
+          contact.save();
+
+        })
+        .catch(error => console.error('Could not find sessions for speaker ' + currentSpeaker.name))
 
       } else {
 
