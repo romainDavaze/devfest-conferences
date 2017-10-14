@@ -16,6 +16,7 @@ const notesStorage = localforage.createInstance({
 
 })
 
+
 const DATA_START_URL = 'https://raw.githubusercontent.com/DevInstitut/conference-data/master/'
 
 

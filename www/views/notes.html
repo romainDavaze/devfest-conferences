@@ -2,18 +2,28 @@
 <html>
 
 <head>
+        <link type="text/css" rel="stylesheet" href="../vendors/css/material-icons.css" />
+        <link type="text/css" rel="stylesheet" href="../vendors/css/materialize.css" media="screen,projection" />
 </head>
 
 <body>
-    <h1 id='session-title'></h1>
+    <h1 id="session-title"></h1><br/>
 
+    <a id="btn-take-pic" class="waves-effect waves-light btn"><i class="material-icons right">camera_alt</i>Take picture</a>
+    <a id="btn-upload-pic" class="waves-effect waves-light btn"><i class="material-icons right">image</i>Upload image</a>
 
     <textarea id='note'></textarea>
     <br/>
 
+    <img id="picture"/>
+    <br/>
+    
     <input id='save' type='submit' value='Save note'/>
 
 
+    <script src="../cordova.js"></script>
+    <script src="../vendors/js/jquery.min.js"></script>
+    <script src="../vendors/js/materialize.js"></script>
     <script src='../vendors/js/localforage.js'></script>
     <script src='../scripts/cache-service.js'></script>
     <script src='../scripts/notes.js'></script>
