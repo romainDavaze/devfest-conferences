@@ -13,7 +13,7 @@ const DEVFEST_URL = 'https://devfest.gdgnantes.com';
     contactSwitch.onchange = (() => handleContact(contactSwitch.checked));
 
     let speakerID = window.location.search.substring(1).split('=').pop();
-    let speakerName;
+    let currentSpeaker;
 
     let fields = [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.name];
 
@@ -24,7 +24,7 @@ const DEVFEST_URL = 'https://devfest.gdgnantes.com';
     getSpeaker(speakerID)
       .then(speaker => {
 
-        speakerName = speaker.name;
+        currentSpeaker = speaker;
 
         options.filter = speaker.name;
 
@@ -95,9 +95,22 @@ const DEVFEST_URL = 'https://devfest.gdgnantes.com';
 
       if (checked) {
 
+        let speakerCompany = new ContactOrganization();
+        speakerCompany.name = currentSpeaker.company;
+
+        let speakerLinks = [];
+
+        if("socials" in currentSpeaker) {
+          currentSpeaker.socials.forEach(social => 
+            speakerLinks.push(new ContactField(social.name, social.link, false))
+          )
+        }
+
         let contact = navigator.contacts.create({
-          "displayName": speakerName,
-          "name": speakerName,
+          "displayName": currentSpeaker.name,
+          "name": currentSpeaker.name,
+          "organizations" : [speakerCompany],
+          "urls" : speakerLinks
           // "photo" : [document.getElementById('speaker-pic').src]
         })
 
