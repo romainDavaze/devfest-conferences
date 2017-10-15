@@ -185,3 +185,12 @@ function getNote(sessionID){
 function saveNote(sessionID, note){
   getNote(sessionID).then(savedNote => notesStorage.setItem(sessionID, note))
 }
+
+function deleteImageFromNote(sessionID){
+  getNote(sessionID).then(savedNote => {
+    if(savedNote){
+      delete savedNote.picture;
+      notesStorage.setItem(sessionID, savedNote);
+    }
+  })
+}
