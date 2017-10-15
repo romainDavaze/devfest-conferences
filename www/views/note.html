@@ -11,11 +11,27 @@
 
     <a id="btn-take-pic" class="waves-effect waves-light btn"><i class="material-icons right">camera_alt</i>Take picture</a>
     <a id="btn-upload-pic" class="waves-effect waves-light btn"><i class="material-icons right">image</i>Upload image</a>
+    <br/>
+
+    <a id="btn-record-audio" disabled class="waves-effect waves-light btn"><i class="material-icons right">audiotrack</i>Record audio</a>
+    <a id="btn-record-video" class="waves-effect waves-light btn"><i class="material-icons right">videocam</i>Record video</a>
 
     <textarea id='note'></textarea>
     <br/>
 
     <img id="picture"/>
+    <br/>
+
+    <audio id="note-audio" hidden controls="controls">
+            Your browser does not support the <code>audio</code> element.
+            <source id="note-source-audio" type="audio">
+    </audio>
+    <br/>
+
+    <video id="note-video" hidden width="320" height="240" controls>
+            <source id="note-source-video">
+          Your browser does not support the video tag.
+    </video>
     <br/>
     
     <input id='save' type='submit' value='Save note'/>
@@ -26,7 +42,7 @@
     <script src="../vendors/js/materialize.js"></script>
     <script src='../vendors/js/localforage.js'></script>
     <script src='../scripts/cache-service.js'></script>
-    <script src='../scripts/notes.js'></script>
+    <script src='../scripts/note.js'></script>
 </body>
 
 </html>

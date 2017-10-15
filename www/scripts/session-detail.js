@@ -26,7 +26,7 @@
       document.getElementById('session-description').innerHTML = session.description;
     }
 
-    document.getElementById('session-notes').setAttribute('href', '../views/notes.html?sessionID=' + session.id);
+    document.getElementById('session-notes').setAttribute('href', '../views/note.html?sessionID=' + session.id);
 
 
     getSessionSpeakers(sessionID)

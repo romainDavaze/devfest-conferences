@@ -12,6 +12,8 @@ const sessionID = window.location.search.substring(1).split('=').pop();
     document.getElementById('btn-take-pic').onclick = takePicture;
     document.getElementById('btn-upload-pic').onclick = uploadPicture;
     document.getElementById('picture').onclick = showPopup;
+    document.getElementById('btn-record-audio').onclick = recordAudio;
+    document.getElementById('btn-record-video').onclick = recordVideo;
 
 
     getSession(sessionID)
@@ -25,6 +27,17 @@ const sessionID = window.location.search.substring(1).split('=').pop();
             if (note) {
               document.getElementById('note').value = note.text;
               document.getElementById('picture').src = note.picture;
+              if(note.video) {
+                let source = document.getElementById('note-source-video');
+                let video  = document.getElementById('note-video');
+      
+                source.src = note.video.src;
+                source.type = note.video.type;
+      
+                video.load();
+                video.hidden = false;
+
+              }
             }
           })
           .catch(error => console.error('Error while trying to get notes from session ' + session.title))
@@ -35,7 +48,11 @@ const sessionID = window.location.search.substring(1).split('=').pop();
     function save() {
       saveNote(sessionID, {
         text: document.getElementById('note').value,
-        picture: document.getElementById('picture').src
+        picture: document.getElementById('picture').src,
+        video: {
+          src: document.getElementById('note-source-video').src,
+          type: document.getElementById('note-source-video').type
+        }
       });
     }
 
@@ -113,7 +130,50 @@ const sessionID = window.location.search.substring(1).split('=').pop();
       window.plugins.actionsheet.show(options, handlePopupAction);
     }
 
+    function recordAudio(){
+
+      navigator.device.capture.captureAudio(
+        mediaFiles => console.log(mediaFiles),
+        //mediaFiles => document.getElementById('note-audio').src = mediaFiles[0].fullPath,
+        error => {
+          console.log('Error while trying to record audio ', error);
+          alert('No default audio recording app is defined on your phone. \n Install one and try again');
+        },
+        {
+          limit: 1,
+          duration: 60
+        })
+
+    }
+
+    function recordVideo(){
+
+      navigator.device.capture.captureVideo(
+        mediaFiles => {
+
+          let source = document.getElementById('note-source-video');
+          let video  = document.getElementById('note-video');
+
+          let media = mediaFiles[0];
+
+          source.src = media.fullPath;
+          source.type = media.type;
+
+          video.load();
+          video.hidden = false;
+        },
+        //mediaFiles => document.getElementById('note-audio').src = mediaFiles[0].fullPath,
+        error => console.error('Error while trying to record video'),
+        {
+          limit: 1,
+          duration: 30
+        })
+
+    }
+
   }
+
+
 
 
 })();
