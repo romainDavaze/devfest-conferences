@@ -2,23 +2,31 @@
 <html>
 
 <head>
-    <link type="text/css" rel="stylesheet" href="../vendors/css/material-icons.css" />
-    <link type="text/css" rel="stylesheet" href="../vendors/css/materialize.css" media="screen,projection" />
+  <meta name="format-detection" content="telephone=yes">
+  <meta name="msapplication-tap-highlight" content="no">
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+
+  <link type="text/css" rel="stylesheet" href="../vendors/css/material-icons.css" />
+  <link type="text/css" rel="stylesheet" href="../vendors/css/materialize.css" media="screen,projection" />
+  <link type="text/css" rel="stylesheet" href="../styles/speaker-detail.css" />
 </head>
 
 <body>
 
-  <div id="speaker">
+  <nav>
+    <div class="nav-wrapper">
+      <a id="speaker-name" class="brand-logo center"></a>
+    </div>
+  </nav>
 
-    <h1 id="speaker-name"></h1>
-    <br/>
+  <div id="speaker">
 
     <div class="switch">
       <label>
-        Off
+        Remove
         <input id="add-contact" type="checkbox">
         <span class="lever"></span>
-        On
+        Add
       </label>
     </div>
     <br/>
@@ -29,9 +37,9 @@
     <p id="speaker-bio"></p>
     <br/>
 
-    <ul id="sessions">
+    <div id="sessions">
 
-    </ul>
+    </div>
 
   </div>
 

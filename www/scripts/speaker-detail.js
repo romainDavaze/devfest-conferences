@@ -63,7 +63,7 @@ const DEVFEST_URL = 'https://devfest.gdgnantes.com';
             let sessionParent = document.getElementById('sessions');
 
             let sessionChild = document.createElement('a');
-            sessionChild.innerHTML = session.title + '<br/>';
+            sessionChild.innerHTML = '* ' + session.title + '<br/>';
             sessionChild.setAttribute('href', '../views/session-detail.html?sessionID=' + session.id);
 
             sessionParent.appendChild(sessionChild);
