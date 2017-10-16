@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta name="format-detection" content="telephone=yes">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+
+    <link type="text/css" rel="stylesheet" href="../vendors/css/material-icons.css" />
+    <link type="text/css" rel="stylesheet" href="../vendors/css/materialize.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="../styles/about-device.css" />
+</head>
+
+<body>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo center">About my device</a>
+        </div>
+    </nav>
+
+    <table id="device-info">
+        <tr>
+            <td >Platform</td>
+            <td id="platform"></td>
+        </tr>
+        <tr>
+            <td>Version</td>
+            <td id="version"></td>
+        </tr>
+        <tr>
+            <td>UUID</td>
+            <td id="uuid"></td>
+        </tr>
+        <tr>
+            <td>Model</td>
+            <td id="model"></td>
+        </tr>
+        <tr>
+            <td>Connection</td>
+            <td id="connection"></td>
+        </tr>
+
+    </table>
+
+    <script src="../cordova.js"></script>
+    <script src='../scripts/about-device.js'></script>
+</body>
+
+</html>

@@ -1,0 +1,15 @@
+.nav-wrapper {
+  background-color: #3A8C43;
+  height: 10vh;
+}
+
+.brand-logo {
+  font-size: 5vw !important;
+  font-weight: bold;
+}
+
+#sessions {
+  overflow: auto;
+  max-height: 90vh;
+  margin-bottom: 0;
+}

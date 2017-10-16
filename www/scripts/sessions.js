@@ -13,17 +13,14 @@
   
       let current = sessions[i];
   
-      let div = document.createElement('div');
-  
       let element = document.createElement('a');
+      element.className += ' collection-item';
   
       element.setAttribute('href','../views/session-detail.html?sessionID='+current.id);
 
       element.innerHTML = current.title;
   
-      div.appendChild(element);
-  
-      parent.appendChild(div);
+      parent.appendChild(element);
     }
   }
   

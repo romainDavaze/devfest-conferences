@@ -3,6 +3,7 @@
   document.addEventListener("deviceready", onDeviceReady, false);
   
   function onDeviceReady() {
+
       // Now safe to use device APIs
       let platform   = document.getElementById('platform');
       let version    = document.getElementById('version');
@@ -14,7 +15,7 @@
       version.innerHTML    = device.version;
       uuid.innerHTML       = device.uuid;
       model.innerHTML      = device.model;
-      connection.innerHTML = navigator.connection.type;
+      connection.innerHTML = navigator.connection.type.toUpperCase();
   }
 
 

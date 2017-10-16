@@ -1,0 +1,23 @@
+.nav-wrapper {
+  background-color: #F3B93A;
+}
+
+.brand-logo {
+  font-size: 5vw !important;
+  font-weight: bold;
+}
+
+#device-info {
+  margin-top: 8vh;
+  width: 90vw;
+  margin-left: 11vw;
+}
+
+td {
+  text-align: left;
+  font-size: 4.5vw;
+}
+
+td:first-child {
+  font-weight: bold;
+}

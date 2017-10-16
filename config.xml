@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="fr.romaindavaze.devfestconferences" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>devfest-conferences</name>
+    <name>Devfest Conferences</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+        Training app using cordova and service worker
     </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
+    <author email="davaze.romain@gmail.com">
+        Romain Davaze
     </author>
     <content src="home.html" />
     <access origin="*" />

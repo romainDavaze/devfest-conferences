@@ -13,17 +13,14 @@
 
       let current = speakers[i];
 
-      let div = document.createElement('div');
-
       let element = document.createElement('a');
+      element.className += ' collection-item';
 
       element.setAttribute('href', '../views/speaker-detail.html?speakerID=' + current.id);
 
       element.innerHTML = current.name;
 
-      div.appendChild(element);
-
-      parent.appendChild(div);
+      parent.appendChild(element);
 
     }
   }
