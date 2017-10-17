@@ -1,0 +1,42 @@
+.nav-wrapper {
+  background-color: #3A8C43;
+  height: 10vh;
+}
+
+.brand-logo {
+  font-size: 3.5vw !important;
+  font-weight: bold;
+  width: 90vw;
+}
+
+#session-pic {
+  width: 70vw;
+  height: 40vh;
+  margin : 4vh 15vw 0 15vw;
+}
+
+#session-description {
+  margin: 3.5vh 5vw 0 5vw;
+  font-size: 4vw;
+  font-style: italic;
+}
+
+#speakers {
+  font-weight: bold;
+  font-size: 4.5vw;
+  margin: 0 5vw 0 5vw;
+}
+
+#speakers > a {
+  font-size: 4vw; 
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  margin-left: 5vw;
+}
+
+#session-notes {
+  margin-top: 4vh;
+  float: right;
+  margin-right: 5vw;
+  background-color: #F3B93A;
+}

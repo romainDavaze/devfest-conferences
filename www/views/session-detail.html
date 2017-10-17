@@ -1,23 +1,38 @@
 <!doctype html>
 <html>
- 
+
 <head>
+  <meta name="format-detection" content="telephone=yes">
+  <meta name="msapplication-tap-highlight" content="no">
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+
+  <link type="text/css" rel="stylesheet" href="../vendors/css/material-icons.css" />
+  <link type="text/css" rel="stylesheet" href="../vendors/css/materialize.css" media="screen,projection" />
+  <link type="text/css" rel="stylesheet" href="../styles/session-detail.css" />
 </head>
+
 <body>
- 
+
+  <nav>
+    <div class="nav-wrapper">
+      <a id="session-name" class="brand-logo center"></a>
+    </div>
+  </nav>
+
   <div id="session">
+
+    <a id="session-notes" class="waves-effect waves-light btn">My notes</a>
   
-    <h1 id="session-name"></h1><br/>
+    <img id="session-pic" />
+    <br/>
 
-    <img id="session-pic"/><br/>
+    <p id="session-description"></p>
+    <br/>
 
-    <p id="session-description"></p><br/>
-  
-    <ul id="speakers">
+    <div id="speakers">
 
-    </ul><br/>
-
-    <a id="session-notes">Notes</a>
+    </div>
+    <br/>
 
   </div>
 
@@ -25,6 +40,7 @@
   <script src="../vendors/js/localforage.js"></script>
   <script src="../scripts/cache-service.js"></script>
   <script src="../scripts/session-detail.js"></script>
- 
+
 </body>
+
 </html>
