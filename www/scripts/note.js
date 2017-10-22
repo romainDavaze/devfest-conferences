@@ -142,6 +142,7 @@ const DEFAULT_PIC = '../assets/default-pic.png';
         case 1:
           deleteImageFromNote(sessionID, document.getElementById('pic'+selectedPicID).src, DEFAULT_PIC );
           document.getElementById('pic'+selectedPicID).src = DEFAULT_PIC;
+          pictures[selectedPicID-1] = DEFAULT_PIC;
           picIndex = selectedPicID - 1;
           break;
         default: window.plugins.actionsheet.hide();
