@@ -3,6 +3,11 @@
   height: 10vh;
 }
 
+#speaker {
+  max-height: 90vh;
+  overflow: auto;
+}
+
 .brand-logo {
   font-size: 5vw !important;
   font-weight: bold;

@@ -10,7 +10,8 @@ const DEFAULT_PIC = '../assets/default-pic.png';
 
   function onDeviceReady() {
 
-    document.getElementById('save').onclick = save;
+    document.getElementById('save-note').onclick = save;
+    document.getElementById('share-note').onclick = shareNote;
     document.getElementById('btn-take-pic').onclick = takePicture;
     document.getElementById('btn-upload-pic').onclick = uploadPicture;
     document.getElementById('pic1').onclick = (() => showPopup(1));
@@ -54,6 +55,17 @@ const DEFAULT_PIC = '../assets/default-pic.png';
                 video.hidden = false;
 
               }
+
+              if(note.audio) {
+                let source = document.getElementById('note-source-audio');
+                let audio  = document.getElementById('note-audio');
+      
+                source.src = note.audio.src;
+                source.type = note.audio.type;
+      
+                audio.load();
+                audio.hidden = false;                
+              }
             }
 
             for (var index = pictures.length; index < 4; index++) {
@@ -82,9 +94,44 @@ const DEFAULT_PIC = '../assets/default-pic.png';
         }
       }
 
+      let audioSource = document.getElementById('note-source-audio');
+      
+      if(audioSource.src != "" && audioSource.type != ""){
+        data.audio = {
+            src: audioSource.src,
+            type: audioSource.type
+        }
+      }      
+
       saveNote(sessionID, data);
     }
 
+    function shareNote() {
+      
+      let files = pictures.filter(pic => pic != DEFAULT_PIC);
+      console.log(pictures);
+      // if(document.getElementById('btn-record-video').src != ""){
+      //   files.push(document.getElementById('btn-record-video').src);
+      // }
+
+      // if(document.getElementById('btn-record-audio').src != ""){
+      //   files.push(document.getElementById('btn-record-audio').src);
+      // }
+
+      getSession(sessionID)
+      .then(session => {
+        var options = {
+          message: 'Here are my notes from the session [ ' + session.title + ' ] taken at Devfest Nantes 2017 : \n\n'
+                + document.getElementById('note').value,
+          subject: 'Notes [ ' + session.title + ' ]',
+          files: files,
+          chooserTitle: 'Pick an app'
+        }
+        window.plugins.socialsharing.shareWithOptions(options);
+      })
+      .catch(error => console.error('Could not find session with id ' + sessionID, error))
+    }
+    
     function takePicture() {
 
       navigator.camera.getPicture(
@@ -171,8 +218,18 @@ const DEFAULT_PIC = '../assets/default-pic.png';
     function recordAudio(){
 
       navigator.device.capture.captureAudio(
-        mediaFiles => console.log(mediaFiles),
-        //mediaFiles => document.getElementById('note-audio').src = mediaFiles[0].fullPath,
+        mediaFiles => {
+          let source = document.getElementById('note-source-audio');
+          let audio  = document.getElementById('note-audio');
+
+          let media = mediaFiles[0];
+
+          source.src = media.fullPath;
+          source.type = media.type;
+
+          audio.load();
+          audio.hidden = false;
+        },
         error => {
           console.log('Error while trying to record audio ', error);
           alert('No default audio recording app is defined on your phone. \n Install one and try again');
@@ -215,17 +272,3 @@ const DEFAULT_PIC = '../assets/default-pic.png';
 
 
 })();
-
-// SHARE
-// getSession(sessionID)
-// .then(session => {
-//   var options = {
-//     message: 'Here are my notes from the session [ ' + session.title + ' ] taken at Devfest Nantes 2017 : \n\n'
-//            + document.getElementById('note').value,
-//     subject: 'Notes [ ' + session.title + ' ]',
-//     files: [document.getElementById('picture').src],
-//     chooserTitle: 'Pick an app'
-//   }
-//   window.plugins.socialsharing.shareWithOptions(options);
-// })
-// .catch(error => console.error('Could not find session with id ' + sessionID, error))
