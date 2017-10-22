@@ -2,7 +2,9 @@
 
 const sessionID = window.location.search.substring(1).split('=').pop();
 
-(function () {
+const DEFAULT_PIC = '../assets/default-pic.png';
+
+(() => {
 
   document.addEventListener("deviceready", onDeviceReady, false);
 
@@ -11,10 +13,16 @@ const sessionID = window.location.search.substring(1).split('=').pop();
     document.getElementById('save').onclick = save;
     document.getElementById('btn-take-pic').onclick = takePicture;
     document.getElementById('btn-upload-pic').onclick = uploadPicture;
-    document.getElementById('picture').onclick = showPopup;
+    document.getElementById('pic1').onclick = (() => showPopup(1));
+    document.getElementById('pic2').onclick = (() => showPopup(2));
+    document.getElementById('pic3').onclick = (() => showPopup(3));
+    document.getElementById('pic4').onclick = (() => showPopup(4));
     document.getElementById('btn-record-audio').onclick = recordAudio;
     document.getElementById('btn-record-video').onclick = recordVideo;
 
+    let pictures = [];
+    let picIndex = 0;
+    let selectedPicID;
 
     getSession(sessionID)
       .then(session => {
@@ -22,11 +30,19 @@ const sessionID = window.location.search.substring(1).split('=').pop();
         getNote(sessionID)
           .then(note => {
 
-            document.getElementById('session-title').innerHTML = session.title;
+            document.getElementById('session-name').innerHTML = session.title;
 
             if (note) {
               document.getElementById('note').value = note.text;
-              document.getElementById('picture').src = note.picture;
+
+              if(note.pictures) {
+                for (var index = 0; index < note.pictures.length; index++) {
+                    document.getElementById('pic' + (index+1)).src = note.pictures[index];
+                    pictures.push(note.pictures[index]);
+                    picIndex++;    
+                }
+              }
+              
               if(note.video) {
                 let source = document.getElementById('note-source-video');
                 let video  = document.getElementById('note-video');
@@ -39,34 +55,57 @@ const sessionID = window.location.search.substring(1).split('=').pop();
 
               }
             }
+
+            for (var index = pictures.length; index < 4; index++) {
+              document.getElementById('pic' + (index+1)).src = DEFAULT_PIC;
+              pictures.push(DEFAULT_PIC);        
+            }
+
           })
-          .catch(error => console.error('Error while trying to get notes from session ' + session.title))
+          .catch(error => console.error('Error while trying to get notes from session ' + session.title, error))
       })
-      .catch(error => console.error('Error while trying to get session with ID ' + sessionID))
+      .catch(error => console.error('Error while trying to get session with ID ' + sessionID, error))
 
 
     function save() {
-      saveNote(sessionID, {
+      let data = {
         text: document.getElementById('note').value,
-        picture: document.getElementById('picture').src,
-        video: {
-          src: document.getElementById('note-source-video').src,
-          type: document.getElementById('note-source-video').type
+        pictures: pictures,
+      };
+
+      let videoSource = document.getElementById('note-source-video');
+
+      if(videoSource.src != "" && videoSource.type != ""){
+        data.video = {
+            src: videoSource.src,
+            type: videoSource.type
         }
-      });
+      }
+
+      saveNote(sessionID, data);
     }
 
     function takePicture() {
 
       navigator.camera.getPicture(
-        (image => document.getElementById('picture').src = image),
-        (error => console.error('Error while trying to take a picture')),
+        (image => {
+          if (picIndex < 4 ) {
+            document.getElementById('pic'+ (picIndex+1)).src = image;
+            pictures[picIndex] = image;
+            picIndex++; 
+          }
+          else {
+            document.getElementById('pic1').src = image;
+            pictures[0] = image;
+            picIndex = 1;
+          }
+          }),
+        (error => console.error('Error while trying to take a picture', error)),
         {
           quality: 100,
-          targetHeight: 400,
-          targetWidth: 400,
           sourceType: Camera.PictureSourceType.CAMERA,
-          encodingType: Camera.EncodingType.PNG
+          encodingType: Camera.EncodingType.PNG,
+          destinationType: Camera.DestinationType.NATIVE_URI
         }
       )
 
@@ -76,58 +115,56 @@ const sessionID = window.location.search.substring(1).split('=').pop();
 
       navigator.camera.getPicture(
         (image => {
-          document.getElementById('picture').src = image;
+          if (picIndex  < 4 ) {
+            document.getElementById('pic'+ (picIndex+1)).src = image;
+            pictures[picIndex] = image;
+            picIndex++; 
+          }
+          else {
+            document.getElementById('pic1').src = image;
+            pictures[0] = image;
+            picIndex = 1; 
+          }
         }),
-        (error => console.error('Error while trying to take a picture')),
+        (error => console.error('Error while trying to take a picture', error)),
         {
           quality: 100,
-          targetHeight: 400,
-          targetWidth: 400,
           sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-          encodingType: Camera.EncodingType.PNG
+          encodingType: Camera.EncodingType.PNG,
+          destinationType: Camera.DestinationType.NATIVE_URI
         }
       )
 
     }
 
     function handlePopupAction(index) {
-
       switch (index) {
         case 1:
-          getSession(sessionID)
-            .then(session => {
-              var options = {
-                message: 'Here are my notes from the session [ ' + session.title + ' ] taken at Devfest Nantes 2017 : \n\n'
-                       + document.getElementById('note').value,
-                subject: 'Notes [ ' + session.title + ' ]',
-                files: [document.getElementById('picture').src],
-                chooserTitle: 'Pick an app'
-              }
-              window.plugins.socialsharing.shareWithOptions(options);
-            })
-            .catch(error => console.error('Could not find session with id ' + sessionID, error))
-          break;
-        case 2:
-          document.getElementById('picture').src = '';
-          deleteImageFromNote(sessionID);
+          deleteImageFromNote(sessionID, document.getElementById('pic'+selectedPicID).src, DEFAULT_PIC );
+          document.getElementById('pic'+selectedPicID).src = DEFAULT_PIC;
+          picIndex = selectedPicID - 1;
           break;
         default: window.plugins.actionsheet.hide();
       }
     }
 
-    function showPopup() {
-      var options = {
-        androidTheme: window.plugins.actionsheet.ANDROID_THEMES.THEME_DEVICE_DEFAULT_LIGHT,
-        title: 'What to do with this picture ?',
-        buttonLabels: ['Share note'],
-        androidEnableCancelButton: true,
-        addCancelButtonWithLabel: 'Cancel',
-        addDestructiveButtonWithLabel: 'Delete it',
-        position: [20, 40],
-        destructiveButtonLast: true
-      };
+    function showPopup(id) {
 
-      window.plugins.actionsheet.show(options, handlePopupAction);
+      if(document.getElementById('pic'+id).src.indexOf('default-pic.png') < 0) {
+        selectedPicID = id;
+
+        var options = {
+          androidTheme: window.plugins.actionsheet.ANDROID_THEMES.THEME_DEVICE_DEFAULT_LIGHT,
+          title: 'Do you want to delete this picture ?',
+          androidEnableCancelButton: true,
+          buttonLabels: ['Yes, I do', 'No, please don\'t'],
+          position: [20, 40],
+          destructiveButtonLast: true
+        };
+  
+        window.plugins.actionsheet.show(options, handlePopupAction);
+      }
+      
     }
 
     function recordAudio(){
@@ -178,3 +215,16 @@ const sessionID = window.location.search.substring(1).split('=').pop();
 
 })();
 
+// SHARE
+// getSession(sessionID)
+// .then(session => {
+//   var options = {
+//     message: 'Here are my notes from the session [ ' + session.title + ' ] taken at Devfest Nantes 2017 : \n\n'
+//            + document.getElementById('note').value,
+//     subject: 'Notes [ ' + session.title + ' ]',
+//     files: [document.getElementById('picture').src],
+//     chooserTitle: 'Pick an app'
+//   }
+//   window.plugins.socialsharing.shareWithOptions(options);
+// })
+// .catch(error => console.error('Could not find session with id ' + sessionID, error))

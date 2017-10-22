@@ -186,10 +186,15 @@ function saveNote(sessionID, note){
   getNote(sessionID).then(savedNote => notesStorage.setItem(sessionID, note))
 }
 
-function deleteImageFromNote(sessionID){
+function deleteImageFromNote(sessionID, img, defaultImg){
+
   getNote(sessionID).then(savedNote => {
     if(savedNote){
-      delete savedNote.picture;
+      savedNote.pictures = savedNote.pictures.map(pic => {
+        if (pic == img)
+          pic = defaultImg;
+        return pic;
+      });
       notesStorage.setItem(sessionID, savedNote);
     }
   })
