@@ -16,6 +16,16 @@ const notesStorage = localforage.createInstance({
 
 })
 
+const scheduleStorage = localforage.createInstance({
+  name: 'schedule',
+  storeName: 'schedule'
+})
+
+const calendarStorage = localforage.createInstance({
+  name: 'calendar',
+  storeName: 'calendar'
+})
+
 
 const DATA_START_URL = 'https://raw.githubusercontent.com/DevInstitut/conference-data/master/'
 
@@ -47,6 +57,21 @@ function initIndexDB() {
       .then(speakers => {
         for (let key in speakers) {
           speakersStorage.setItem(key, speakers[key]);
+        }
+      })
+  ]
+  )
+
+  Promise.all([
+    caches.open(scheduleStorage.storeName)
+      .then(cache => {
+        console.log("Schedule storage created");
+      }),
+    fetch(DATA_START_URL + 'schedule.json')
+      .then(resp => resp.json())
+      .then(days => {
+        for (let key in days) {
+          scheduleStorage.setItem(key, days[key]);
         }
       })
   ]
@@ -198,4 +223,74 @@ function deleteImageFromNote(sessionID, img, defaultImg) {
       notesStorage.setItem(sessionID, savedNote);
     }
   })
+}
+
+function findSessionDate(sessionID){
+
+  let sessionDate = {};
+
+  return scheduleStorage.iterate((day, key, iterationNumber) => {
+
+    day.timeslots.map(timeslot => {
+      timeslot.sessions.map(sessions => {
+        if( sessions.includes(parseInt(sessionID))){
+          sessionDate.day = day.date;
+          sessionDate.readableDay = day.dateReadable;
+          sessionDate.startTime = timeslot.startTime;
+          sessionDate.endTime = timeslot.endTime;
+        }
+      })
+      })
+    
+    if(Object.keys(sessionDate).length !== 0)
+      return sessionDate;
+
+  })
+  .then(sessionDate => sessionDate);
+
+}
+
+
+function getFavoriteSession(sessionID){
+  return calendarStorage.getItem(sessionID)
+  .then(session => session != null ? session : undefined)
+}
+
+function addFavoriteSession(session, sessionSpeakers){
+
+  findSessionDate(session.id).then(date => {
+
+  let speakers = [];
+  sessionSpeakers.map(speaker => speakers.push(speaker.name));
+
+  calendarStorage.setItem(session.id.toString(), {
+    sessionID: session.id.toString(),
+    title: session.title,
+    speakers : speakers,
+    date: date
+  })
+
+  })
+
+}
+
+function removeFavoriteSession(sessionID){
+  getFavoriteSession(sessionID)
+    .then(favoriteSession => {
+      if (favoriteSession){
+        calendarStorage.removeItem(sessionID)
+          .then(() => console.log('Favorite session successfully removed'))
+          .catch(error => console.error('Could not remove session'))
+      }
+    })
+
+}
+
+function getAllFavoriteSessions(){
+
+  let sessions = [];
+
+  return calendarStorage
+    .iterate((value, key, iterationNumber) => { sessions.push(value) })
+    .then(() => sessions)
 }

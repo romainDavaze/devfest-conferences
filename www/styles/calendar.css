@@ -1,0 +1,26 @@
+.nav-wrapper {
+    background-color: #5A76B6;
+    height: 10vh;
+}
+  
+.brand-logo {
+    font-size: 5vw !important;
+    font-weight: bold;
+}
+
+.card-action {
+    color: white;
+}
+
+.intro {
+    text-align: center;
+    font-weight: bold;
+    font-size: 4vw;
+    margin-right: 15vw;
+    margin-left: 15vw;
+}
+
+#content {
+    overflow: auto;
+    max-height: 90vh;
+}

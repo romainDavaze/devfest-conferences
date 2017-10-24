@@ -2,6 +2,8 @@
 
 const DEVFEST_URL = 'https://devfest.gdgnantes.com';
 
+const speakerID = window.location.search.substring(1).split('=').pop();
+
 (() => {
 
   document.addEventListener("deviceready", onDeviceReady, false);
@@ -11,8 +13,6 @@ const DEVFEST_URL = 'https://devfest.gdgnantes.com';
 
     let contactSwitch = document.getElementById('add-contact');
     contactSwitch.onchange = (() => handleContact(contactSwitch.checked));
-
-    let speakerID = window.location.search.substring(1).split('=').pop();
     let currentSpeaker;
 
     let fields = [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.name];
@@ -33,50 +33,6 @@ const DEVFEST_URL = 'https://devfest.gdgnantes.com';
         handleSpeaker(speaker);
       })
       .catch(error => console.error('Error while retrieving speaker with ID ' + speakerID, error))
-
-
-    function handleSpeaker(speaker) {
-
-      document.getElementById('speaker-name').innerHTML = speaker.name;
-
-      if (speaker.photoUrl) {
-        document.getElementById('speaker-pic').src = DEVFEST_URL + speaker.photoUrl;
-      } else {
-        document.getElementById('speaker-pic').src = '../assets/logo_devfest.jpg';
-      }
-
-      if (speaker.bio) {
-        document.getElementById('speaker-bio').innerHTML = speaker.bio;
-      }
-
-      getSpeakerSessions(speakerID)
-        .then(sessions => {
-
-          let parent = document.getElementById('speaker');
-
-          if (sessions.length != 0) {
-            document.getElementById('sessions').innerHTML = 'Session(s) <br/>';
-          }
-
-          sessions.map(session => {
-
-            let sessionParent = document.getElementById('sessions');
-
-            let sessionChild = document.createElement('a');
-            sessionChild.innerHTML = '* ' + session.title + '<br/>';
-            sessionChild.setAttribute('href', '../views/session-detail.html?sessionID=' + session.id);
-
-            sessionParent.appendChild(sessionChild);
-
-          });
-
-        })
-        .catch(function (error) {
-          console.error('Error while fetching sessions for speaker ' + speaker.name, error);
-        });
-
-
-    }
 
 
     function checkContact() {
@@ -134,23 +90,67 @@ const DEVFEST_URL = 'https://devfest.gdgnantes.com';
 
     }
 
-    function removeContact(contact) {
-      contact[0].remove();
-    }
-
-    function contactNotFound(error) {
-      console.error('Contact not found ', error);
-    }
-
-    function contactRemoved() {
-      console.log('Contact successfully removed');
-    }
-
-    function contactNotRemoved(error) {
-      console.error('Contact removing failed ', error);
-    }
-
   }
+
+  function handleSpeaker(speaker) {
+    
+          document.getElementById('speaker-name').innerHTML = speaker.name;
+    
+          if (speaker.photoUrl) {
+            document.getElementById('speaker-pic').src = DEVFEST_URL + speaker.photoUrl;
+          } else {
+            document.getElementById('speaker-pic').src = '../assets/logo_devfest.jpg';
+          }
+    
+          if (speaker.bio) {
+            document.getElementById('speaker-bio').innerHTML = speaker.bio;
+          }
+    
+          getSpeakerSessions(speakerID)
+            .then(sessions => {
+    
+              let parent = document.getElementById('speaker');
+    
+              if (sessions.length != 0) {
+                document.getElementById('sessions').innerHTML = 'Session(s) <br/>';
+              }
+    
+              sessions.map(session => {
+    
+                let sessionParent = document.getElementById('sessions');
+    
+                let sessionChild = document.createElement('a');
+                sessionChild.innerHTML = '* ' + session.title + '<br/>';
+                sessionChild.setAttribute('href', '../views/session-detail.html?sessionID=' + session.id);
+    
+                sessionParent.appendChild(sessionChild);
+    
+              });
+    
+            })
+            .catch(function (error) {
+              console.error('Error while fetching sessions for speaker ' + speaker.name, error);
+            });
+    
+    
+        }
+
+  function removeContact(contact) {
+    contact[0].remove();
+  }
+
+  function contactNotFound(error) {
+    console.error('Contact not found ', error);
+  }
+
+  function contactRemoved() {
+    console.log('Contact successfully removed');
+  }
+
+  function contactNotRemoved(error) {
+    console.error('Contact removing failed ', error);
+  }
+
 
 
 })();
