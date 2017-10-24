@@ -14,7 +14,7 @@ const speakerID = window.location.search.substring(1).split('=').pop();
   document.getElementById('nav-calendar').setAttribute('href', '../views/calendar.html');
   document.getElementById('nav-sessions').setAttribute('href', '../views/sessions.html');
   document.getElementById('nav-speakers').setAttribute('href', '../views/speakers.html');
-  document.getElementById('nav-about-phone').setAttribute('href', '../views/about-device.html');
+  document.getElementById('nav-about-device').setAttribute('href', '../views/about-device.html');
 
   document.addEventListener("deviceready", onDeviceReady, false);
 
