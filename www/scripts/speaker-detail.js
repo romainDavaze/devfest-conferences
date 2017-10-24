@@ -100,30 +100,30 @@ const DEVFEST_URL = 'https://devfest.gdgnantes.com';
 
         let speakerLinks = [];
 
-        if("socials" in currentSpeaker) {
-          currentSpeaker.socials.forEach(social => 
+        if ("socials" in currentSpeaker) {
+          currentSpeaker.socials.forEach(social =>
             speakerLinks.push(new ContactField(social.name, social.link, false))
           )
         }
 
         getSpeakerSessions(speakerID)
-        .then(sessions => {
-          let conferences = 'Conference(s) \n';
-          sessions.map(session => conferences += session.title + '\n');
+          .then(sessions => {
+            let conferences = 'Conference(s) \n';
+            sessions.map(session => conferences += session.title + '\n');
 
-          let contact = navigator.contacts.create({
-            "displayName": currentSpeaker.name,
-            "name": currentSpeaker.name,
-            "organizations" : [speakerCompany],
-            "urls" : speakerLinks,
-            "note" : conferences
-            // "photo" : [document.getElementById('speaker-pic').src]
+            let contact = navigator.contacts.create({
+              "displayName": currentSpeaker.name,
+              "name": currentSpeaker.name,
+              "organizations": [speakerCompany],
+              "urls": speakerLinks,
+              "note": conferences
+              // "photo" : [document.getElementById('speaker-pic').src]
+            })
+
+            contact.save();
+
           })
-  
-          contact.save();
-
-        })
-        .catch(error => console.error('Could not find sessions for speaker ' + currentSpeaker.name))
+          .catch(error => console.error('Could not find sessions for speaker ' + currentSpeaker.name))
 
       } else {
 

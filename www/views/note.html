@@ -2,70 +2,72 @@
 <html>
 
 <head>
-        <meta name="format-detection" content="telephone=yes">
-        <meta name="msapplication-tap-highlight" content="no">
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-      
-        <link type="text/css" rel="stylesheet" href="../vendors/css/material-icons.css" />
-        <link type="text/css" rel="stylesheet" href="../vendors/css/materialize.css" media="screen,projection" />
-        <link type="text/css" rel="stylesheet" href="../styles/note.css" />
+  <meta name="format-detection" content="telephone=yes">
+  <meta name="msapplication-tap-highlight" content="no">
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+
+  <link type="text/css" rel="stylesheet" href="../vendors/css/material-icons.css" />
+  <link type="text/css" rel="stylesheet" href="../vendors/css/materialize.css" media="screen,projection" />
+  <link type="text/css" rel="stylesheet" href="../styles/note.css" />
 </head>
 
 <body>
-        <header>
-                        <nav>
-                                        <div class="nav-wrapper">
-                                          <a id="session-name" class="brand-logo center"></a>
-                                        </div>
-                                </nav>
-        </header>
+  <header>
+    <nav>
+      <div class="nav-wrapper">
+        <a id="session-name" class="brand-logo center"></a>
+      </div>
+    </nav>
+  </header>
 
-<main>
-                <div id="content">
-                                <i id="btn-take-pic" class="action material-icons">camera_alt</i>
-                                <i id="btn-upload-pic" class="action material-icons">image</i>
-                                <i id="btn-record-audio" class="action material-icons">audiotrack</i>
-                                <i id="btn-record-video" class="action material-icons">videocam</i>
-                            
-                                <textarea id='note' placeholder="Take notes for this session here"></textarea>
-                                <br/>
-                            
-                                            <img id="pic1" >
-                                            <img id="pic2" >
-                                            <br/>
-                                            <img id="pic3" >
-                                            <img id="pic4" >
-                            
-                                <br/>
-                            
-                                <audio id="note-audio" hidden controls="controls">
-                                        Your browser does not support the <code>audio</code> element.
-                                        <source id="note-source-audio" type="audio">
-                                </audio>
-                                <br/>
-                            
-                                <video id="note-video" hidden width="320" height="240" controls>
-                                        <source id="note-source-video">
-                                      Your browser does not support the video tag.
-                                </video>
-                                <br/>
-                                
-                </div>
-</main>
+  <main>
+    <div id="content">
+      <i id="btn-take-pic" class="action material-icons">camera_alt</i>
+      <i id="btn-upload-pic" class="action material-icons">image</i>
+      <i id="btn-record-audio" class="action material-icons">audiotrack</i>
+      <i id="btn-record-video" class="action material-icons">videocam</i>
 
+      <textarea id='note' placeholder="Take notes for this session here"></textarea>
+      <br/>
 
-        <footer class="page-footer">
-                        <a id="save-note" class="waves-effect waves-light btn"><i class="material-icons right">save</i>Save note</a>
-                        <a id="share-note" class="waves-effect waves-light btn"><i class="material-icons right">share</i>Share note</a>
-        </footer>
+      <img id="pic1">
+      <img id="pic2">
+      <br/>
+      <img id="pic3">
+      <img id="pic4">
+
+      <br/>
+
+      <audio id="note-audio" hidden controls="controls">
+        Your browser does not support the
+        <code>audio</code> element.
+        <source id="note-source-audio" type="audio">
+      </audio>
+      <br/>
+
+      <video id="note-video" hidden width="320" height="240" controls>
+        <source id="note-source-video"> Your browser does not support the video tag.
+      </video>
+      <br/>
+
+    </div>
+  </main>
 
 
-    <script src="../cordova.js"></script>
-    <script src="../vendors/js/jquery.min.js"></script>
-    <script src="../vendors/js/materialize.js"></script>
-    <script src='../vendors/js/localforage.js'></script>
-    <script src='../scripts/cache-service.js'></script>
-    <script src='../scripts/note.js'></script>
+  <footer class="page-footer">
+    <a id="save-note" class="waves-effect waves-light btn">
+      <i class="material-icons right">save</i>Save note</a>
+    <a id="share-note" class="waves-effect waves-light btn">
+      <i class="material-icons right">share</i>Share note</a>
+  </footer>
+
+
+  <script src="../cordova.js"></script>
+  <script src="../vendors/js/jquery.min.js"></script>
+  <script src="../vendors/js/materialize.js"></script>
+  <script src='../vendors/js/localforage.js'></script>
+  <script src='../scripts/cache-service.js'></script>
+  <script src='../scripts/note.js'></script>
 </body>
 
 </html>

@@ -8,7 +8,7 @@
 
   getSession(sessionID)
     .then(session => handleSession(session))
-    .catch(error => console.error('Error while fetching session with id ' +sessionID, error))
+    .catch(error => console.error('Error while fetching session with id ' + sessionID, error))
 
   function handleSession(session) {
 

@@ -1,11 +1,11 @@
 'use strict';
 
-function redirectTo(page){
+function redirectTo(page) {
   window.location.href = page;
 }
 
 function getAllUrlParams(url) {
-  
+
   var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
 
   var obj = {};
@@ -16,17 +16,17 @@ function getAllUrlParams(url) {
 
     var arr = queryString.split('&');
 
-    for (var i=0; i<arr.length; i++) {
-      
+    for (var i = 0; i < arr.length; i++) {
+
       var a = arr[i].split('=');
-    
+
       var paramNum = undefined;
-      var paramName = a[0].replace(/\[\d*\]/, function(v) {
-        paramNum = v.slice(1,-1);
+      var paramName = a[0].replace(/\[\d*\]/, function (v) {
+        paramNum = v.slice(1, -1);
         return '';
       });
-    
-      var paramValue = typeof(a[1])==='undefined' ? true : a[1];
+
+      var paramValue = typeof (a[1]) === 'undefined' ? true : a[1];
 
       paramName = paramName.toLowerCase();
       paramValue = paramValue.toLowerCase();
@@ -36,10 +36,10 @@ function getAllUrlParams(url) {
         if (typeof obj[paramName] === 'string') {
           obj[paramName] = [obj[paramName]];
         }
-        
-        if (typeof paramNum === 'undefined') {      
+
+        if (typeof paramNum === 'undefined') {
           obj[paramName].push(paramValue);
-        }      
+        }
         else {
           obj[paramName][paramNum] = paramValue;
         }

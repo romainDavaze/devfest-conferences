@@ -1,29 +1,36 @@
-importScripts("vendors/js/localforage.js");
+importScripts("../vendors/js/localforage.js");
 
 
 const FILES_TO_CACHE = [
-    'home.html',
+    '../home.html',
+    '../views/note.html',
+    '../views/session-detail.html',
+    '../views/sessions.html',
+    '../views/speaker-detail.html',
+    '../views/speakers.html',
     'home.js',
     'service-worker.js',
-    'views/notes.html',
-    'views/session-detail.html',
-    'views/sessions.html',
-    'views/speaker-detail.html',
-    'views/speakers.html',
-    'scripts/cache-service.js',
-    'scripts/notes.js',
-    'scripts/session-detail.js',
-    'scripts/sessions.js',
-    'scripts/speaker-detail.js',
-    'scripts/speakers.js',
-    'scripts/utils.js',
-    'vendors/css/material-icons.css',
-    'vendors/css/materialize.css',
-    'vendors/js/jquery.min.js',
-    'vendors/js/localforage.js',
-    'vendors/js/materialize.js',
-    'vendors/fonts/roboto/Roboto-Regular.woff2',
-    'assets/logo_devfest.jpg'
+    'cache-service.js',
+    'note.js',
+    'session-detail.js',
+    'sessions.js',
+    'speaker-detail.js',
+    'speakers.js',
+    'utils.js',
+    '../styles/about-device.css',
+    '../styles/home.css',
+    '../styles/note.css',
+    '../styles/session-detail.css',
+    '../styles/sessions.css',
+    '../styles/speaker-detail.css',
+    '../styles/speakers.css',
+    '../vendors/css/material-icons.css',
+    '../vendors/css/materialize.css',
+    '../vendors/js/jquery.min.js',
+    '../vendors/js/localforage.js',
+    '../vendors/js/materialize.js',
+    '../vendors/fonts/roboto/Roboto-Regular.woff2',
+    '../assets/logo_devfest.jpg'
 
 ];
 

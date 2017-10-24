@@ -151,45 +151,45 @@ function getAllSpeakers() {
 function getSpeaker(speakerID) {
 
   return speakersStorage.keys().then(keys => {
-        if (keys.includes(speakerID)) {
-          return speakersStorage.getItem(speakerID)
-        }
-        else {
-          console.error('No speaker existing with the ID '+speakerID);
-        }
-    
-      })
+    if (keys.includes(speakerID)) {
+      return speakersStorage.getItem(speakerID)
+    }
+    else {
+      console.error('No speaker existing with the ID ' + speakerID);
+    }
+
+  })
 }
 
 function getSpeakerSessions(speakerID) {
 
   return getSpeaker(speakerID)
-  .then(speaker => {
-    
+    .then(speaker => {
+
       return getAllSessions()
         .then(sessions => sessions
-                            .filter(session => "speakers" in session)
-                            .filter(session => session.speakers.includes(speaker.id))
+          .filter(session => "speakers" in session)
+          .filter(session => session.speakers.includes(speaker.id))
         )
 
-  })
-  .catch(error => console.error('Error while fetching sessions for speaker ' + speaker.name, error))
+    })
+    .catch(error => console.error('Error while fetching sessions for speaker ' + speaker.name, error))
 
 }
 
-function getNote(sessionID){
+function getNote(sessionID) {
   return notesStorage.getItem(sessionID)
-          .then(note => note != null ? note : undefined)
+    .then(note => note != null ? note : undefined)
 }
 
-function saveNote(sessionID, note){
+function saveNote(sessionID, note) {
   getNote(sessionID).then(savedNote => notesStorage.setItem(sessionID, note))
 }
 
-function deleteImageFromNote(sessionID, img, defaultImg){
+function deleteImageFromNote(sessionID, img, defaultImg) {
 
   getNote(sessionID).then(savedNote => {
-    if(savedNote){
+    if (savedNote) {
       savedNote.pictures = savedNote.pictures.map(pic => {
         if (pic == img)
           pic = defaultImg;
