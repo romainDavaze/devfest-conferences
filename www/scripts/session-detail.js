@@ -15,8 +15,8 @@ const sessionID = window.location.search.substring(1).split('=').pop();
   document.getElementById('nav-speakers').setAttribute('href', '../views/speakers.html');
   document.getElementById('nav-about-device').setAttribute('href', '../views/about-device.html');
 
-  let favoriteSessionSwitch = document.getElementById('add-favorite-session');
-  favoriteSessionSwitch.onchange = (() => handleFavoriteSession(favoriteSessionSwitch.checked));
+  let favoriteCheckbox = document.getElementById('add-favorite-session');
+  favoriteCheckbox.onchange = (() => handleFavoriteSession(favoriteCheckbox.checked));
 
   let currentSession;
   let sessionSpeakers;
@@ -64,9 +64,9 @@ const sessionID = window.location.search.substring(1).split('=').pop();
     getFavoriteSession(sessionID)
     .then(favoriteSession => {
       if (favoriteSession){
-        favoriteSessionSwitch.checked = true;
+        favoriteCheckbox.checked = true;
       } else {
-        favoriteSessionSwitch.checked = false;
+        favoriteCheckbox.checked = false;
       }
     })
   }

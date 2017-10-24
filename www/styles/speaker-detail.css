@@ -13,10 +13,10 @@
   font-weight: bold;
 }
 
-.switch {
+#add {
   margin-top: 4vh;
-  float: right;
-  margin-right: 5vw;
+  float: left;
+  margin-left: 5vw;
 }
 
 #speaker-pic {

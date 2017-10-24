@@ -45,15 +45,15 @@ body {
 
 #session-notes {
   margin-top: 4vh;
-  float: left;
-  margin-left: 5vw;
+  float: right;
+  margin-right: 5vw;
   background-color: #F3B93A;
 }
 
-.switch {
+#favorite {
   margin-top: 5.5vh;
-  float: right;
-  margin-right: 5vw;
+  float: left;
+  margin-left: 5vw;
 }
 
 #logo-nav {

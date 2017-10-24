@@ -13,14 +13,10 @@
 
 	getAllFavoriteSessions()
 		.then(sessions => {
-			console.log(sessions);
 			sortSessions(sessions);
 
 			sessions.map(session => addEvent(session));
-
 		})
-
-
 
 	function sortSessions(sessions){
 		sessions.sort(function(a,b) {
