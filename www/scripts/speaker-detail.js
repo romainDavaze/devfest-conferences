@@ -6,8 +6,17 @@ const speakerID = window.location.search.substring(1).split('=').pop();
 
 (() => {
 
-  document.addEventListener("deviceready", onDeviceReady, false);
+  $(document).ready(function(){
+    $('.button-collapse').sideNav();
+  });
+  
+  document.getElementById('nav-home').setAttribute('href', '../home.html');
+  document.getElementById('nav-calendar').setAttribute('href', '../views/calendar.html');
+  document.getElementById('nav-sessions').setAttribute('href', '../views/sessions.html');
+  document.getElementById('nav-speakers').setAttribute('href', '../views/speakers.html');
+  document.getElementById('nav-about-phone').setAttribute('href', '../views/about-device.html');
 
+  document.addEventListener("deviceready", onDeviceReady, false);
 
   function onDeviceReady() {
 
@@ -78,6 +87,8 @@ const speakerID = window.location.search.substring(1).split('=').pop();
 
             contact.save();
 
+            Materialize.toast(currentSpeaker.name + ' added to contacts', 3000);
+
           })
           .catch(error => console.error('Could not find sessions for speaker ' + currentSpeaker.name))
 
@@ -137,6 +148,7 @@ const speakerID = window.location.search.substring(1).split('=').pop();
 
   function removeContact(contact) {
     contact[0].remove();
+    Materialize.toast(contact[0].displayName + ' removed from contacts', 3000);
   }
 
   function contactNotFound(error) {

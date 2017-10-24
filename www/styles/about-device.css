@@ -21,3 +21,10 @@ td {
 td:first-child {
   font-weight: bold;
 }
+
+#logo-nav {
+  width: 50vw;
+  margin-left: 12vw;
+  margin-top: 3vh;
+  height: 25vh;
+}

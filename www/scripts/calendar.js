@@ -1,5 +1,16 @@
 (() => {
 
+	$(document).ready(function(){
+		$('.button-collapse').sideNav();
+	  });
+	  
+	  document.getElementById('nav-home').setAttribute('href', '../home.html');
+	  document.getElementById('nav-calendar').onclick = (() => $('.button-collapse').sideNav('hide'));
+	  document.getElementById('nav-sessions').setAttribute('href', '../views/sessions.html');
+	  document.getElementById('nav-speakers').setAttribute('href', '../views/speakers.html');
+	  document.getElementById('nav-about-device').setAttribute('href', '../views/about-device.html');	
+
+
 	getAllFavoriteSessions()
 		.then(sessions => {
 			console.log(sessions);

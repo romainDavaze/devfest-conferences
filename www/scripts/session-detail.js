@@ -1,10 +1,19 @@
 'use strict';
 
+const DEVFEST_URL = 'https://devfest.gdgnantes.com'
+const sessionID = window.location.search.substring(1).split('=').pop();
+
 (() => {
 
-  const DEVFEST_URL = 'https://devfest.gdgnantes.com'
-
-  const sessionID = window.location.search.substring(1).split('=').pop();
+  $(document).ready(function(){
+    $('.button-collapse').sideNav();
+  });
+  
+  document.getElementById('nav-home').setAttribute('href', '../home.html');
+  document.getElementById('nav-calendar').setAttribute('href', '../views/calendar.html');
+  document.getElementById('nav-sessions').setAttribute('href', '../views/sessions.html');
+  document.getElementById('nav-speakers').setAttribute('href', '../views/speakers.html');
+  document.getElementById('nav-about-device').setAttribute('href', '../views/about-device.html');
 
   let favoriteSessionSwitch = document.getElementById('add-favorite-session');
   favoriteSessionSwitch.onchange = (() => handleFavoriteSession(favoriteSessionSwitch.checked));
@@ -84,8 +93,10 @@
   function handleFavoriteSession(checked){
     if(checked){
       addFavoriteSession(currentSession, sessionSpeakers);
+      Materialize.toast(currentSession.title + ' added as favorite to calendar', 3000);
     } else {
       removeFavoriteSession(sessionID);
+      Materialize.toast(currentSession.title + ' removed from calendar', 3000);
     }
   }
 

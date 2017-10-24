@@ -6,6 +6,16 @@ const DEFAULT_PIC = '../assets/default-pic.png';
 
 (() => {
 
+  $(document).ready(function(){
+    $('.button-collapse').sideNav();
+  });
+  
+  document.getElementById('nav-home').setAttribute('href', '../home.html');
+  document.getElementById('nav-calendar').setAttribute('href', '../views/calendar.html');
+  document.getElementById('nav-sessions').setAttribute('href', '../views/sessions.html');
+  document.getElementById('nav-speakers').setAttribute('href', '../views/speakers.html');
+  document.getElementById('nav-about-device').setAttribute('href', '../views/about-device.html');
+
   document.addEventListener("deviceready", onDeviceReady, false);
 
   document.getElementById('save-note').onclick = save;
@@ -108,6 +118,8 @@ const DEFAULT_PIC = '../assets/default-pic.png';
     }
 
     saveNote(sessionID, data);
+
+    Materialize.toast('Note saved ! ', 3000);
   }
 
   function shareNote() {

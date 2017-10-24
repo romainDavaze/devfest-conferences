@@ -1,6 +1,16 @@
 'use strict';
 
-(function () {
+(() => {
+
+  $(document).ready(function(){
+    $('.button-collapse').sideNav();
+  });
+  
+  document.getElementById('nav-home').setAttribute('href', '../home.html');
+  document.getElementById('nav-calendar').setAttribute('href', '../views/calendar.html');
+  document.getElementById('nav-sessions').onclick = (() => $('.button-collapse').sideNav('hide'));
+  document.getElementById('nav-speakers').setAttribute('href', '../views/speakers.html');
+  document.getElementById('nav-about-device').setAttribute('href', '../views/about-device.html');
 
   getAllSessions()
     .then(sessions => handleSessions(sessions))

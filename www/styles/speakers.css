@@ -13,3 +13,10 @@
   max-height: 90vh;
   margin-bottom: 0;
 }
+
+#logo-nav {
+  width: 50vw;
+  margin-left: 12vw;
+  margin-top: 3vh;
+  height: 25vh;
+}
