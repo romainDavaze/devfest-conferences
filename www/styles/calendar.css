@@ -8,8 +8,12 @@
     font-weight: bold;
 }
 
-.card-action {
-    color: white;
+.card-title {
+   font-weight: bold !important;
+}
+
+.author {
+    font-style: italic !important;
 }
 
 .intro {

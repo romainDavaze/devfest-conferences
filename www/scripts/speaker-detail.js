@@ -18,11 +18,10 @@ const speakerID = window.location.search.substring(1).split('=').pop();
 
   document.addEventListener("deviceready", onDeviceReady, false);
 
-  let contactCheckbox = document.getElementById('add-contact');
-  contactCheckbox.onchange = (() => handleContact(contactCheckbox.checked));
-  
-
   function onDeviceReady() {
+
+    let contactCheckbox = document.getElementById('add-contact');
+    contactCheckbox.onchange = (() => handleContact(contactCheckbox.checked));
 
     let currentSpeaker;
 
@@ -49,8 +48,11 @@ const speakerID = window.location.search.substring(1).split('=').pop();
     function checkContact() {
       navigator.contacts.find(fields,
         (contact => {
+          console.log(contact);
           if (contact.length != 0) {
             contactCheckbox.checked = true;
+          } else {
+            contactCheckbox.checked = false;
           }
         }),
         (error => contactCheckbox.checked = false),

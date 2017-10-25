@@ -37,16 +37,17 @@
 	  col.onclick = (() => redirectTo('../views/session-detail.html?sessionID=' + session.sessionID));
 
 	  let card = document.createElement('div');
-	  card.className = 'card blue-grey darken-1';
+	  card.className = 'card lighten-1';
 
 	  let content = document.createElement('div');
-	  content.className = 'card-content white-text';
+	  content.className = 'card-content black-text';
 
 	  let span = document.createElement('span');
 	  span.className = 'card-title';
 	  span.innerHTML = session.title;
 
-	  let p = document.createElement('p');
+		let p = document.createElement('p');
+		p.className = 'author';
 	  
 	  if(session.speakers.length != 0) {
 		  p.innerHTML = 'By ';
