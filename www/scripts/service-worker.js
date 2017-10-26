@@ -1,6 +1,5 @@
 importScripts("../vendors/js/localforage.js");
 
-
 const FILES_TO_CACHE = [
     '../home.html',
     '../views/note.html',
@@ -36,7 +35,6 @@ const FILES_TO_CACHE = [
 
 const STATIC_CACHE_NAME = 'devfest-conferences-pages';
 
-
 self.addEventListener('install', event => {
 
     console.log('Installing Service Worker...');
@@ -48,7 +46,6 @@ self.addEventListener('install', event => {
             caches.open(STATIC_CACHE_NAME)
                 .then(cache => cache.addAll(FILES_TO_CACHE))
         ])
-
     );
 });
 
@@ -56,25 +53,10 @@ self.skipWaiting();
 
 self.addEventListener('activate', event => {
     console.log('Activating Service Worker...');
-
-    // const cacheWhiteList = [STATIC_CACHE_NAME];
-
-    // event.waitUntil(
-    //     caches.keys().then(cachesNames => {
-    //         return Promise.all(
-    //             cachesNames.map(cacheName => {
-    //                 if (cacheWhiteList.indexOf(cacheName) < 0) {
-    //                     return caches.delete(cacheName);
-    //                 }
-    //             })
-    //         )
-    //     })
-    // )
 })
 
 
 self.addEventListener('fetch', event => {
-
     console.log('Fetching:', event.request.url);
 
     event.respondWith(
@@ -100,5 +82,4 @@ self.addEventListener('fetch', event => {
             })
             .catch(error => console.error("Error while getting " + event.request))
     );
-
 });

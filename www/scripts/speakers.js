@@ -2,10 +2,10 @@
 
 (() => {
 
-  $(document).ready(function(){
+  $(document).ready(() => {
     $('.button-collapse').sideNav();
   });
-  
+
   document.getElementById('nav-home').setAttribute('href', '../home.html');
   document.getElementById('nav-calendar').setAttribute('href', '../views/calendar.html');
   document.getElementById('nav-sessions').setAttribute('href', '../views/sessions.html');
@@ -17,8 +17,15 @@
     .catch(error => console.error('Error while fetching speakers data', error));
 
   function handleSpeakers(speakers) {
-    for (let i in speakers) {
 
+    speakers.sort((a, b) => {
+      let AName = a.name.toLowerCase();
+      let BName = b.name.toLowerCase();
+
+      return (AName < BName) ? -1 : (AName > BName) ? 1 : 0;
+    });
+
+    for (let i in speakers) {
       let parent = document.getElementById('speakers');
 
       let current = speakers[i];
@@ -31,10 +38,8 @@
       element.innerHTML = current.name;
 
       parent.appendChild(element);
-
     }
   }
-
 
 })();
 

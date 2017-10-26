@@ -1,15 +1,14 @@
 'use strict';
 
 const sessionID = window.location.search.substring(1).split('=').pop();
-
-const DEFAULT_PIC = '../assets/default-pic.png';
+const DEFAULT_PIC = '../assets/default-note-pic.png';
 
 (() => {
 
-  $(document).ready(function(){
+  $(document).ready(function () {
     $('.button-collapse').sideNav();
   });
-  
+
   document.getElementById('nav-home').setAttribute('href', '../home.html');
   document.getElementById('nav-calendar').setAttribute('href', '../views/calendar.html');
   document.getElementById('nav-sessions').setAttribute('href', '../views/sessions.html');
@@ -123,17 +122,7 @@ const DEFAULT_PIC = '../assets/default-pic.png';
   }
 
   function shareNote() {
-
     let files = pictures.filter(pic => pic != DEFAULT_PIC).filter(pic => !pic.startsWith('content'));
-
-    // if (device.model = "Android") {
-    //   files.map(file => {
-    //     window.FilePath.resolveNativePath(file,
-    //       (path => path),
-    //       (error => console.error('Could not retrieve native URL for file ' + file, error)))
-    //   }
-    //   );
-    // }
 
     getSession(sessionID)
       .then(session => {
@@ -150,7 +139,6 @@ const DEFAULT_PIC = '../assets/default-pic.png';
   }
 
   function takePicture() {
-
     navigator.camera.getPicture(
       (image => {
         if (picIndex < 4) {
@@ -172,11 +160,9 @@ const DEFAULT_PIC = '../assets/default-pic.png';
         destinationType: Camera.DestinationType.FILE_URI
       }
     )
-
   }
 
   function uploadPicture() {
-
     navigator.camera.getPicture(
       (image => {
         if (picIndex < 4) {
@@ -198,7 +184,6 @@ const DEFAULT_PIC = '../assets/default-pic.png';
         destinationType: Camera.DestinationType.FILE_URI
       }
     )
-
   }
 
   function handlePopupAction(index) {
@@ -214,7 +199,6 @@ const DEFAULT_PIC = '../assets/default-pic.png';
   }
 
   function showPopup(id) {
-
     if (document.getElementById('pic' + id).src.indexOf('default-pic.png') < 0) {
       selectedPicID = id;
 
@@ -229,14 +213,11 @@ const DEFAULT_PIC = '../assets/default-pic.png';
 
       window.plugins.actionsheet.show(options, handlePopupAction);
     }
-
   }
 
   function recordAudio() {
-
     navigator.device.capture.captureAudio(
       mediaFiles => {
-        alert('toto');
         let source = document.getElementById('note-source-audio');
         let audio = document.getElementById('note-audio');
 
@@ -260,10 +241,8 @@ const DEFAULT_PIC = '../assets/default-pic.png';
   }
 
   function recordVideo() {
-
     navigator.device.capture.captureVideo(
       mediaFiles => {
-
         let source = document.getElementById('note-source-video');
         let video = document.getElementById('note-video');
 
@@ -281,9 +260,6 @@ const DEFAULT_PIC = '../assets/default-pic.png';
         limit: 1,
         duration: 30
       })
-
   }
-
-
 
 })();

@@ -1,9 +1,9 @@
 (() => {
 
-  $(document).ready(function(){
+  $(document).ready(() => {
     $('.button-collapse').sideNav();
   });
-  
+
   document.getElementById('nav-home').setAttribute('href', '../home.html');
   document.getElementById('nav-calendar').setAttribute('href', '../views/calendar.html');
   document.getElementById('nav-sessions').setAttribute('href', '../views/sessions.html');

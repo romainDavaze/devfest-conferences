@@ -17,6 +17,7 @@ var app = {
         document.getElementById('btn-sessions').onclick = (() => redirectTo('views/sessions.html'));
         document.getElementById('btn-speakers').onclick = (() => redirectTo('views/speakers.html'));
         document.getElementById('btn-about').onclick = (() => redirectTo('views/about-device.html'));
+        
         if (!('serviceWorker' in navigator)) {
             console.log('Service worker is not supported'); return;
         }

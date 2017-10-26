@@ -1,37 +1,37 @@
 .nav-wrapper {
-    background-color: #5A76B6;
-    height: 10vh;
+  background-color: #5A76B6;
+  height: 10vh;
 }
   
 .brand-logo {
-    font-size: 5vw !important;
-    font-weight: bold;
+  font-size: 5vw !important;
+  font-weight: bold;
 }
 
 .card-title {
-   font-weight: bold !important;
+  font-weight: bold !important;
 }
 
 .author {
-    font-style: italic !important;
+  font-style: italic !important;
 }
 
 .intro {
-    text-align: center;
-    font-weight: bold;
-    font-size: 4vw;
-    margin-right: 15vw;
-    margin-left: 15vw;
+  text-align: center;
+  font-weight: bold;
+  font-size: 4vw;
+  margin-right: 15vw;
+  margin-left: 15vw;
 }
 
 #content {
-    overflow: auto;
-    max-height: 90vh;
+  overflow: auto;
+  max-height: 90vh;
 }
 
 #logo-nav {
-    width: 50vw;
-    margin-left: 12vw;
-    margin-top: 3vh;
-    height: 25vh;
+  width: 50vw;
+  margin-left: 12vw;
+  margin-top: 3vh;
+  height: 25vh;
   }

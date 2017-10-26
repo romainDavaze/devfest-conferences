@@ -225,7 +225,7 @@ function deleteImageFromNote(sessionID, img, defaultImg) {
   })
 }
 
-function findSessionDate(sessionID){
+function findSessionDate(sessionID) {
 
   let sessionDate = {};
 
@@ -233,51 +233,51 @@ function findSessionDate(sessionID){
 
     day.timeslots.map(timeslot => {
       timeslot.sessions.map(sessions => {
-        if( sessions.includes(parseInt(sessionID))){
+        if (sessions.includes(parseInt(sessionID))) {
           sessionDate.day = day.date;
           sessionDate.readableDay = day.dateReadable;
           sessionDate.startTime = timeslot.startTime;
           sessionDate.endTime = timeslot.endTime;
         }
       })
-      })
-    
-    if(Object.keys(sessionDate).length !== 0)
+    })
+
+    if (Object.keys(sessionDate).length !== 0)
       return sessionDate;
 
   })
-  .then(sessionDate => sessionDate);
+    .then(sessionDate => sessionDate);
 
 }
 
 
-function getFavoriteSession(sessionID){
+function getFavoriteSession(sessionID) {
   return calendarStorage.getItem(sessionID)
-  .then(session => session != null ? session : undefined)
+    .then(session => session != null ? session : undefined)
 }
 
-function addFavoriteSession(session, sessionSpeakers){
+function addFavoriteSession(session, sessionSpeakers) {
 
   findSessionDate(session.id).then(date => {
 
-  let speakers = [];
-  sessionSpeakers.map(speaker => speakers.push(speaker.name));
+    let speakers = [];
+    sessionSpeakers.map(speaker => speakers.push(speaker.name));
 
-  calendarStorage.setItem(session.id.toString(), {
-    sessionID: session.id.toString(),
-    title: session.title,
-    speakers : speakers,
-    date: date
-  })
+    calendarStorage.setItem(session.id.toString(), {
+      sessionID: session.id.toString(),
+      title: session.title,
+      speakers: speakers,
+      date: date
+    })
 
   })
 
 }
 
-function removeFavoriteSession(sessionID){
+function removeFavoriteSession(sessionID) {
   getFavoriteSession(sessionID)
     .then(favoriteSession => {
-      if (favoriteSession){
+      if (favoriteSession) {
         calendarStorage.removeItem(sessionID)
           .then(() => console.log('Favorite session successfully removed'))
           .catch(error => console.error('Could not remove session'))
@@ -286,7 +286,7 @@ function removeFavoriteSession(sessionID){
 
 }
 
-function getAllFavoriteSessions(){
+function getAllFavoriteSessions() {
 
   let sessions = [];
 

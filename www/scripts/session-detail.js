@@ -5,10 +5,10 @@ const sessionID = window.location.search.substring(1).split('=').pop();
 
 (() => {
 
-  $(document).ready(function(){
+  $(document).ready(() => {
     $('.button-collapse').sideNav();
   });
-  
+
   document.getElementById('nav-home').setAttribute('href', '../home.html');
   document.getElementById('nav-calendar').setAttribute('href', '../views/calendar.html');
   document.getElementById('nav-sessions').setAttribute('href', '../views/sessions.html');
@@ -24,14 +24,12 @@ const sessionID = window.location.search.substring(1).split('=').pop();
   getSession(sessionID)
     .then(session => {
       currentSession = session;
-
       checkFavoriteSession();
       handleSession();
     })
     .catch(error => console.error('Error while fetching session with id ' + sessionID, error))
 
   function handleSession() {
-
     let parent = document.getElementById('session');
 
     document.getElementById('session-name').innerHTML = currentSession.title;
@@ -48,10 +46,8 @@ const sessionID = window.location.search.substring(1).split('=').pop();
 
     document.getElementById('session-notes').setAttribute('href', '../views/note.html?sessionID=' + currentSession.id);
 
-
     getSessionSpeakers(sessionID)
       .then(speakers => {
-
         sessionSpeakers = speakers;
         handleSessionSpeakers();
       })
@@ -60,38 +56,35 @@ const sessionID = window.location.search.substring(1).split('=').pop();
       });
   }
 
-  function checkFavoriteSession(){
+  function checkFavoriteSession() {
     getFavoriteSession(sessionID)
-    .then(favoriteSession => {
-      if (favoriteSession){
-        favoriteCheckbox.checked = true;
-      } else {
-        favoriteCheckbox.checked = false;
-      }
-    })
+      .then(favoriteSession => {
+        if (favoriteSession) {
+          favoriteCheckbox.checked = true;
+        } else {
+          favoriteCheckbox.checked = false;
+        }
+      })
   }
 
-  function handleSessionSpeakers(){
-
+  function handleSessionSpeakers() {
     if (sessionSpeakers.length != 0) {
       document.getElementById('speakers').innerHTML = 'Speaker(s) <br/>';
     }
 
     sessionSpeakers.map(speaker => {
-
       let speakerParent = document.getElementById('speakers');
 
       let speakerChild = document.createElement('a');
-      speakerChild.innerHTML = speaker.name + '<br/>';
+      speakerChild.innerHTML = '* ' + speaker.name + '<br/>';
       speakerChild.setAttribute('href', '../views/speaker-detail.html?speakerID=' + speaker.id);
 
       speakerParent.appendChild(speakerChild);
-
     })
   }
 
-  function handleFavoriteSession(checked){
-    if(checked){
+  function handleFavoriteSession(checked) {
+    if (checked) {
       addFavoriteSession(currentSession, sessionSpeakers);
       Materialize.toast(currentSession.title + ' added as favorite to calendar', 3000);
     } else {

@@ -2,10 +2,10 @@
 
 (() => {
 
-  $(document).ready(function(){
+  $(document).ready(() => {
     $('.button-collapse').sideNav();
   });
-  
+
   document.getElementById('nav-home').setAttribute('href', '../home.html');
   document.getElementById('nav-calendar').setAttribute('href', '../views/calendar.html');
   document.getElementById('nav-sessions').onclick = (() => $('.button-collapse').sideNav('hide'));
@@ -17,8 +17,15 @@
     .catch(error => console.error('Error while fetching sessions data', error));
 
   function handleSessions(sessions) {
-    for (let i in sessions) {
 
+    sessions.sort((a, b) => {
+      let ATitle = a.title.toLowerCase();
+      let BTitle = b.title.toLowerCase();
+
+      return (ATitle < BTitle) ? -1 : (ATitle > BTitle) ? 1 : 0;
+    });
+
+    for (let i in sessions) {
       let parent = document.getElementById('sessions');
 
       let current = sessions[i];
@@ -33,7 +40,6 @@
       parent.appendChild(element);
     }
   }
-
 
 })();
 

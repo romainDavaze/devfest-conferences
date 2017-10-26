@@ -1,14 +1,29 @@
 {
   "name": "fr.romaindavaze.devfestconferences",
-  "displayName": "devfest-conferences",
+  "displayName": "Devfest Conferences",
   "version": "1.0.0",
   "description": "Training cordova app which allows to have information about Devfest Nantes 2017 and take notes",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "cordova build android && cordova run android"
   },
-  "author": "Apache Cordova Team",
-  "license": "Apache-2.0",
+  "author": {
+    "name": "Romain Davaze",
+    "email": "davaze.romain@gmail.com",
+    "url": "https://github.com/romainDavaze/"
+  },
+  "license": "MIT",
+  "keywords": [
+    "conference",
+    "devfest",
+    "cordova",
+    "android"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/romainDavaze/devfest-conferences.git"
+  },
   "dependencies": {
     "cordova-android": "^6.3.0",
     "cordova-plugin-actionsheet": "^2.3.3",
