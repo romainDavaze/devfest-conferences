@@ -41,6 +41,8 @@ Build & Deploy
 - [x] Play the audio
 - [x] Show information about the phone running the app (platform, connection, model...)
 - [x] Show the favorites sessions in a built-in calendar
+- [x] Use inAppBrowser plugin to open urls inside the app
+- [x] Adding as an extra option the possibility to follow the speaker on twitter
 
 ## Author
 

@@ -37,7 +37,7 @@ const sessionID = window.location.search.substring(1).split('=').pop();
     if (currentSession.image) {
       document.getElementById('session-pic').src = DEVFEST_URL + currentSession.image;
     } else {
-      document.getElementById('session-pic').src = '../assets/logo_devfest.jpg';
+      document.getElementById('session-pic').src = '../assets/logo-devfest.jpg';
     }
 
     if (currentSession.description) {

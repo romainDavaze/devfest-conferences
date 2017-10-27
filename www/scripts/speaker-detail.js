@@ -34,7 +34,8 @@ const speakerID = window.location.search.substring(1).split('=').pop();
         currentSpeaker = speaker;
 
         options.filter = speaker.name;
-
+        
+        checkTwitterAccount();
         checkContact();
         handleSpeaker(speaker);
       })
@@ -51,6 +52,17 @@ const speakerID = window.location.search.substring(1).split('=').pop();
         }),
         (error => contactCheckbox.checked = false),
         options);
+    }
+
+    function checkTwitterAccount(){
+      if("socials" in currentSpeaker){
+        let twitter = currentSpeaker.socials.filter(social => social.name == "Twitter");
+        if(twitter.length != 0 ){
+          let followImg = document.getElementById('follow-twitter');
+          followImg.onclick = (() => cordova.InAppBrowser.open(twitter[0].link, '_blank', 'location=no'))
+          followImg.hidden = false;
+        }
+      }
     }
 
     function handleContact(checked) {

@@ -50,3 +50,11 @@
   margin-top: 3vh;
   height: 25vh;
 }
+
+#follow-twitter {
+  margin-top: 2vh;
+  float: right;
+  margin-right: 5vw;
+  width: 30vw;
+  height: 7vh;  
+}
