@@ -32,7 +32,9 @@ const sessionID = window.location.search.substring(1).split('=').pop();
   function handleSession() {
     let parent = document.getElementById('session');
 
-    document.getElementById('session-name').innerHTML = currentSession.title;
+    if(currentSession.title.length > 35) {
+      document.getElementById('session-name').innerHTML = currentSession.title.substring(0, 35) + '...';
+    }
 
     if (currentSession.image) {
       document.getElementById('session-pic').src = DEVFEST_URL + currentSession.image;
