@@ -29,14 +29,14 @@ Build & Deploy
 - [x] Display the list of speakers
 - [x] Display the detail of a session
 - [x] Display the detail of a speaker
-- [x] Add a speaker to the phone's contacts
-- [x] Add a session as a favorite session which will be displayed in the calendar
+- [x] Add / remove a speaker to the phone's contacts
+- [x] Add / remove a session as a favorite session which will be displayed in the calendar
 - [x] Take notes during a session and save it
 - [x] Take a picture or upload an image in the note
 - [x] Delete the picture by tapping on it
 - [x] Share a note
 - [x] Capture a video
-- [x] Capture audio using the microphone
+- [x] Capture audio
 - [x] Play the video
 - [x] Play the audio
 - [x] Show information about the phone running the app (platform, connection, model...)

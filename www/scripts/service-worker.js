@@ -29,7 +29,10 @@ const FILES_TO_CACHE = [
     '../vendors/js/localforage.js',
     '../vendors/js/materialize.js',
     '../vendors/fonts/roboto/Roboto-Regular.woff2',
-    '../assets/logo_devfest.jpg'
+    '../assets/logo-devfest.jpg',
+    '../assets/default-note-pic.png',
+    '../assets/default-speaker-pic.png',
+    '../assets/follow-button.png'
 
 ];
 
